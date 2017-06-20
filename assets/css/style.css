@@ -1,0 +1,22 @@
+body {
+    background-image: url("../images/unc-argyle-bg.jpg");
+    text-align: center;
+}
+
+#main-div {
+    background: #fff;
+    border: 2px solid gray;
+}
+
+#title {
+    margin-top: 20px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 24px;
+    color: #4B9CD3;
+}
+
+button {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 24px;
+    color: #4B9CD3;
+}
