@@ -38,3 +38,9 @@ p {
 #stats {
     font-size: 24px;
 }
+
+#timer {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 24px;
+    color: #4B9CD3;
+}
