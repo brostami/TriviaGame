@@ -3,6 +3,26 @@ body {
     text-align: center;
 }
 
+button {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 24px;
+    color: #4B9CD3;
+}
+
+ul {
+  list-style-type: none;
+}
+
+h2 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 36px;
+    color: #4B9CD3;
+}
+
+p {
+    font-weight: bold;
+}
+
 #main-div {
     background: #fff;
     border: 2px solid gray;
@@ -15,8 +35,6 @@ body {
     color: #4B9CD3;
 }
 
-button {
-    font-family: Georgia, "Times New Roman", serif;
+#stats {
     font-size: 24px;
-    color: #4B9CD3;
 }

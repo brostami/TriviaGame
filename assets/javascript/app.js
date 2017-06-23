@@ -1,3 +1,4 @@
+$( document ).ready(function() {
 var questions = [{
     question: "Who was the team’s coach in the 1999-2000 season?",
     answers: ["Dean Smith", "Bill Guthridge", "Matt Doherty", "Roy Williams"],
@@ -23,7 +24,7 @@ var questions = [{
 var intervalId;
 var clockRunning;
 var timer = {
-    time: 15,
+    time: 29,
     start: function() {
         if (!clockRunning) {
             intervalId = setInterval(timer.count, 1000);
@@ -35,29 +36,69 @@ var timer = {
         clockRunning = false;
     },
     count: function() {
+        $("#timer").html("Time Remaining: " + timer.time);
         timer.time--;
-        $("#timer").html(timer.time);
     }
 };
-var userChoice;
-var numberRight;
-var numberWrong;
-var unanswered;
+
+var numberRight = 0;
+var numberWrong = 0;
+var unanswered = 0;
 var currentQuestion;
-var answerMessage;
+var answers;
 var correctResponse;
-var answerImage;
 
-$("#start").click(function(){
+$("#startbtn").on("click", function() {
     $("#start").hide();
-
+    startGame();
+});
+    
+function startGame() {
+    $("#timer").html("Time Remaining: 30");
     for (var i = 0; i < questions.length; i++) {
-        timer.start;
-        $("#question").html(questions[i].question);
-        for (var j = 0; j < questions[i].answers.length; j++) {
-            var option = questions[i].answers[j];
-            $('<li><input type="radio" value=' + j + ' name="dynradio" />' + option + '</li>').appendTo$("#answers");
+        timer.start();
+        currentQuestion = questions[i].question;
+        answers = questions[i].answers;
+        correctResponse = questions[i].correctAnswer;
+        var newDiv = $("<div>");
+        newDiv.append("<p>" + currentQuestion + "</p>");
+        for (var j = 0; j < answers.length; j++) {
+            
+            var option = answers[j];
+            var name = "radiobtn" + i;
+            newDiv.append($('<li style="list-style: none;"><input type="radio" value=' + j + ' name="radiobtn' + i + '" >' + option + '</li>'));
+            $("#question").append(newDiv);
+        }
+    } 
+    setTimeout(endGame, 30000);
+}
+
+function checkAnswers() {
+    for (var i = 0; i < questions.length; i++) {
+        var choices = document.getElementsByName('radiobtn'+i);
+        for (var j = 0; j < choices.length; j++) {
+            var choice = choices[j];
+            if (choice.checked && choice.value == questions[i].correctAnswer) {
+                numberRight++;
+            }
+            else if (choice.checked && choice.value != questions[i].correctAnswer) {
+                numberWrong++;
+            }
         }
     }
+    unanswered = 5 - (numberWrong + numberRight);
+}
 
-})
+function endGame() {
+    timer.stop();
+    checkAnswers();
+    $("#question").hide();
+    $("#timer").hide();
+    var stats = $("<p>Correct Answers: " + numberRight + "</p>" +
+        "<p>Incorrect Answers: " + numberWrong + "</p>" +
+        "<p>Unanswered: " + unanswered + "</p>");
+    $("#message").html("<h2>All Done!</h2>");
+    $("#stats").append(stats);
+}
+
+});
