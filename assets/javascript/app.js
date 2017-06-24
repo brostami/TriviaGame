@@ -24,7 +24,7 @@ var questions = [{
 var intervalId;
 var clockRunning;
 var timer = {
-    time: 29,
+    time: 44,
     start: function() {
         if (!clockRunning) {
             intervalId = setInterval(timer.count, 1000);
@@ -52,9 +52,10 @@ $("#startbtn").on("click", function() {
     $("#start").hide();
     startGame();
 });
-    
+
 function startGame() {
-    $("#timer").html("Time Remaining: 30");
+    $("#timer").html("Time Remaining: 45");
+    $("#done").html("<button id='donebtn' style='width:200px; margin-top: 30px;'><b>Done</b></button>")
     for (var i = 0; i < questions.length; i++) {
         timer.start();
         currentQuestion = questions[i].question;
@@ -70,7 +71,10 @@ function startGame() {
             $("#question").append(newDiv);
         }
     } 
-    setTimeout(endGame, 30000);
+    setTimeout(endGame, 45000);
+    $("#donebtn").on("click", function() {
+        endGame();
+    });
 }
 
 function checkAnswers() {
@@ -94,6 +98,7 @@ function endGame() {
     checkAnswers();
     $("#question").hide();
     $("#timer").hide();
+    $("#donebtn").hide();
     var stats = $("<p>Correct Answers: " + numberRight + "</p>" +
         "<p>Incorrect Answers: " + numberWrong + "</p>" +
         "<p>Unanswered: " + unanswered + "</p>");
